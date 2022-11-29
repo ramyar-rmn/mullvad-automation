@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="added fixes and features">
+    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="typo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/bridge.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/connection.py" afterDir="false" />
@@ -47,6 +47,8 @@
       <workItem from="1669666737163" duration="586000" />
       <workItem from="1669668651624" duration="199000" />
       <workItem from="1669703131785" duration="2117000" />
+      <workItem from="1669706989747" duration="300000" />
+      <workItem from="1669711049238" duration="4940000" />
     </task>
     <task id="LOCAL-00001" summary="edited the json read">
       <created>1669636900169</created>
@@ -62,7 +64,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669665178307</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="minor optimizations">
+      <created>1669707213646</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669707213646</updated>
+    </task>
+    <task id="LOCAL-00004" summary="typo">
+      <created>1669707274418</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1669707274418</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -88,11 +104,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="edited the json read" />
     <MESSAGE value="added fixes and features" />
-    <option name="LAST_COMMIT_MESSAGE" value="added fixes and features" />
+    <MESSAGE value="minor optimizations" />
+    <MESSAGE value="typo" />
+    <option name="LAST_COMMIT_MESSAGE" value="typo" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/mullvad_automation$account.coverage" NAME="account Coverage Results" MODIFIED="1669662071341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mullvad_automation$connection.coverage" NAME="connection Coverage Results" MODIFIED="1669664922985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mullvad_automation$connection.coverage" NAME="connection Coverage Results" MODIFIED="1669711443245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mullvad_automation$bridge.coverage" NAME="bridge Coverage Results" MODIFIED="1669662058431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

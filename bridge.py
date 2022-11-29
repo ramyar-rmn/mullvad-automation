@@ -35,6 +35,7 @@ def set_shadow_socks():
     proxy_address = '194.127.199.245'  # TODO: read from server list
     proxy_port = '443'
     ss_port = '1080'
+    # TODO: wrote it based on mullvad tutorial but it's not assured
     subprocess.run(['mullvad-exclude', 'ss-local', '-s', proxy_address, '-p', proxy_port, '-l', ss_port, '-k',
                     'mullvad', '-m', 'chacha20-ietf-poly1305', '-b', '127.0.0.1', '--fast-open', '--no-delay',
                     '--plugin', 'ss-v2ray-plugin', '--plugin-opts', '''"mode=quic;host=$HOST"'''])
@@ -43,7 +44,7 @@ def set_shadow_socks():
     subprocess.run(['mullvad', 'bridge', 'set', 'state', 'on'])
 
 
-def ok():  # TODO: write for proxy: remote as well if needed
+def ok(info=False):  # TODO: write for proxy: remote as well if needed
     bridge_status = subprocess.run(['mullvad', 'bridge', 'get'], stdout=subprocess.PIPE)
     bridge_state = str(bridge_status.stdout.split(b'\n')[0].split(b" ")[-1]).split("'")[1]
     if bridge_state == 'off':
@@ -54,8 +55,9 @@ def ok():  # TODO: write for proxy: remote as well if needed
         bridge_local_port = str(bridge_status.stdout.split(b'\n')[2].split(b" ")[-1]).split("'")[1]
         bridge_proxy_address = str(bridge_status.stdout.split(b'\n')[3].split(b" ")[-1]).split("'")[1].split(":")[0]
         bridge_proxy_port = str(bridge_status.stdout.split(b'\n')[3].split(b" ")[-1]).split("'")[1].split(":")[1]
-        print("A", bridge_proxy_type, "Bridge is set to connect to", bridge_proxy_address+":"+bridge_proxy_port,
-              "via", bridge_local_port)
+        if info is False:
+            print("A", bridge_proxy_type, "Bridge is set to connect to", bridge_proxy_address+":"+bridge_proxy_port,
+                  "via", bridge_local_port)
         listening_ports = subprocess.run(['lsof', '-i', '-P', '-n'], stdout=subprocess.PIPE)
         proxy_open_ports = list()
         for line in listening_ports.stdout.decode('utf-8').split('\n'):
@@ -66,6 +68,8 @@ def ok():  # TODO: write for proxy: remote as well if needed
         proxy_open_ports = [line for line in proxy_open_ports if line[-1] == '(LISTEN)']
         # ['COMMAND', 'PID', 'USER', 'FD', 'TYPE', 'DEVICE', 'SIZE/OFF', 'NODE', 'NAME']
         if proxy_open_ports:
+            if info is True:
+                return {'ip': bridge_proxy_address, 'port': bridge_proxy_port, 'listening': proxy_open_ports}
             print("and it is listening")
             return True
         else:
@@ -74,6 +78,9 @@ def ok():  # TODO: write for proxy: remote as well if needed
 
 
 def activate(bridge_type):  # TODO: set for TOR and remote
+    listening = ok(info=True)['listening']
+    for p in listening:
+        subprocess.run(['kill', '-9', p[1]])
     if bridge_type == 'ssh':
         set_ssh_proxy()
     elif bridge_type == 'shadow':
