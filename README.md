@@ -3,6 +3,7 @@
 ## Prerequisites
 + sshpass
 + mullvad
++ shdowsocks (ss-local)
 + python
 
 ## Usage
