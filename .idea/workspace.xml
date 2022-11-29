@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="">
+    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="added fixes and features">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/bridge.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/connection.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +29,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;/run/media/ramin/Warehouse/JetbrainsProjects/PycharmProjects/mullvad-automation&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.spelling&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
@@ -41,6 +44,9 @@
       <workItem from="1669633361397" duration="2867000" />
       <workItem from="1669636860277" duration="2306000" />
       <workItem from="1669656590308" duration="9960000" />
+      <workItem from="1669666737163" duration="586000" />
+      <workItem from="1669668651624" duration="199000" />
+      <workItem from="1669703131785" duration="2117000" />
     </task>
     <task id="LOCAL-00001" summary="edited the json read">
       <created>1669636900169</created>

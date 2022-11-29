@@ -4,6 +4,7 @@ import subprocess
 def set_tor_proxy():
     # proxy_address = '127.0.0.1'
     # proxy_port = '9150'  # or 9050
+    # check TOR availability or start it
     pass  # TODO: fill
 
 
@@ -70,3 +71,10 @@ def ok():  # TODO: write for proxy: remote as well if needed
         else:
             print("but it is not listening")
             return False
+
+
+def activate(bridge_type):  # TODO: set for TOR and remote
+    if bridge_type == 'ssh':
+        set_ssh_proxy()
+    elif bridge_type == 'shadow':
+        set_shadow_socks()

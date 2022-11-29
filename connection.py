@@ -15,7 +15,7 @@ bridge_to_be = shell_args[2]
 while True:
     vpn_status = subprocess.run(['mullvad', 'status'], stdout=subprocess.PIPE)
     vpn_connection = vpn_status.stdout.decode('utf-8').split(" ")
-    while vpn_connection[0] == "Connected":
+    while vpn_connection[0] == "Connected":  # reporting connection
         bridge.ok()
         print("You are supposed to be connected to", vpn_connection[-3])
         connection_state = json.loads(urlopen('https://am.i.mullvad.net/json').read().decode())
@@ -35,6 +35,7 @@ while True:
                               subprocess.run(['mullvad', 'bridge', 'get'], stdout=subprocess.PIPE).stdout.decode(
                                   'utf-8').split('\n')[3].split(" ")[-1].split(":")[0]],
                              stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')[1].split(' ')[-2])
+        # TODO: reconnect if ping time goes too high
         if str(connection_state["mullvad_exit_ip"]) == 'false' \
                 or str(connection_state["blacklisted"]["blacklisted"]) == 'true':
             subprocess.run(['mullvad', 'disconnect'])
@@ -53,13 +54,10 @@ while True:
                 continue
             if vpn_connection[0] == "Connected":
                 break
-        else:  # TODO: set for TOR and remote
+        else:
             print("Trying to run the bridge")
-            if bridge_to_be == 'ssh':
-                bridge.set_ssh_proxy()
-            elif bridge_to_be == 'shadow':
-                bridge.set_shadow_socks()
-    while vpn_connection[0].startswith("Disconnecting"):
+            bridge.activate(bridge_to_be)
+    while vpn_connection[0].startswith("Disconnecting"):  # it happens when the proxy bridge is failing
         subprocess.run(['mullvad', 'disconnect'])
         vpn_status = subprocess.run(['mullvad', 'status'], stdout=subprocess.PIPE)
         vpn_connection = vpn_status.stdout.decode('utf-8').split(" ")
@@ -67,8 +65,5 @@ while True:
         if bridge.ok():
             account.logout()
             account.login(mullvad_account)
-        else:  # TODO: set for TOR and remote
-            if bridge_to_be == 'ssh':
-                bridge.set_ssh_proxy()
-            elif bridge_to_be == 'shadow':
-                bridge.set_shadow_socks()
+        else:
+            bridge.activate(bridge_to_be)
