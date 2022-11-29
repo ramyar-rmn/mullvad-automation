@@ -29,14 +29,17 @@ while True:
         print('from address:', connection_state["ip"])
         print('located in:', connection_state["country"])
         print('and blacklisted status is:', connection_state["blacklisted"]["blacklisted"])
-        ping_time_mullvad = subprocess.run(['ping', '-c', '1', 'mullvad.net'],
-                                           stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')[1].split(' ')[-2]
+        ping_time_mullvad = subprocess.run(['ping', '-c', '1', 'mullvad.net'], stdout=subprocess.PIPE)
+        ping_time_vpn = subprocess.run(['ping', '-c', '1', connection_state["ip"]], stdout=subprocess.PIPE)
+        ping_time_proxy = subprocess.run(['ping', '-c', '1', bridge.ok(info=True)['ip']], stdout=subprocess.PIPE)
+        try:
+            ping_time_mullvad = ping_time_mullvad.stdout.decode('utf-8').split('\n')[1].split(' ')[-2]
+            ping_time_vpn = ping_time_vpn.stdout.decode('utf-8').split('\n')[1].split(' ')[-2]
+            ping_time_proxy = ping_time_proxy.stdout.decode('utf-8').split('\n')[1].split(' ')[-2]
+        except IndexError:
+            break
         print('PING to mullvad.net takes:', ping_time_mullvad)
-        ping_time_vpn = subprocess.run(['ping', '-c', '1', connection_state["ip"]],
-                                       stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')[1].split(' ')[-2]
         print('PING to vpn server takes:', ping_time_vpn)
-        ping_time_proxy = subprocess.run(['ping', '-c', '1', bridge.ok(info=True)['ip']],
-                                         stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')[1].split(' ')[-2]
         print('PING to proxy server takes:', ping_time_proxy)
         # reconnect for 1.leaked connection 2.blacklisted IP
         # 3.high ping to mullvad 4.high ping to vpn server 5.high ping to proxy server

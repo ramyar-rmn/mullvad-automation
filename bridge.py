@@ -78,9 +78,10 @@ def ok(info=False):  # TODO: write for proxy: remote as well if needed
 
 
 def activate(bridge_type):  # TODO: set for TOR and remote
-    listening = ok(info=True)['listening']
-    for p in listening:
-        subprocess.run(['kill', '-9', p[1]])
+    if ok():
+        listening = ok(info=True)['listening']
+        for p in listening:
+            subprocess.run(['kill', '-9', p[1]])
     if bridge_type == 'ssh':
         set_ssh_proxy()
     elif bridge_type == 'shadow':
