@@ -48,9 +48,8 @@ while True:
                 or connection_state["blacklisted"]["blacklisted"] is True \
                 or (int(ping_time_mullvad.split("=")[1]) + int(ping_time_vpn.split("=")[1])
                     + int(ping_time_proxy.split("=")[1])) > 3000:
-            subprocess.run(
-                ['mullvad', 'disconnect'])  # TODO: not secured -> the connection will not be through VPN for a while
             bridge.activate(bridge_to_be)
+            subprocess.run(['mullvad', 'reconnect'])
             break
         sleep(30)
         vpn_status = subprocess.run(['mullvad', 'status'], stdout=subprocess.PIPE)
@@ -71,10 +70,9 @@ while True:
             print("Trying to run the bridge")
             bridge.activate(bridge_to_be)
     while vpn_connection[0].startswith("Disconnecting"):  # it happens when the proxy bridge is failing
-        print("disconnect from mullvad and checking the bridge")
-        subprocess.run(
-            ['mullvad', 'disconnect'])  # TODO: not secured -> the connection will not be through VPN for a while
+        print("checking the bridge and reconnect to mullvad")
         bridge.activate(bridge_to_be)
+        subprocess.run(['mullvad', 'reconnect'])
         vpn_status = subprocess.run(['mullvad', 'status'], stdout=subprocess.PIPE)
         vpn_connection = vpn_status.stdout.decode('utf-8').split(" ")
     while not account.logged(mullvad_account):  # login

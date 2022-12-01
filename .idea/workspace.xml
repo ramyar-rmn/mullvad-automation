@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="fixes on activating bridge">
-      <change afterPath="$PROJECT_DIR$/tor.py" afterDir="false" />
+    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="Added many features and fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/bridge.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/connection.py" afterDir="false" />
@@ -57,7 +56,7 @@
       <workItem from="1669703131785" duration="2117000" />
       <workItem from="1669706989747" duration="300000" />
       <workItem from="1669711049238" duration="5100000" />
-      <workItem from="1669719282750" duration="24396000" />
+      <workItem from="1669719282750" duration="24995000" />
     </task>
     <task id="LOCAL-00001" summary="edited the json read">
       <created>1669636900169</created>
@@ -101,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669722051998</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added many features and fixes">
+      <created>1669922997093</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669922997093</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,7 +137,8 @@
     <MESSAGE value="typo" />
     <MESSAGE value="added features and major fix" />
     <MESSAGE value="fixes on activating bridge" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes on activating bridge" />
+    <MESSAGE value="Added many features and fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added many features and fixes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/mullvad_automation$account.coverage" NAME="account Coverage Results" MODIFIED="1669662071341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

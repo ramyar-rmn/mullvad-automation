@@ -1,5 +1,6 @@
 import subprocess
 from random import randint
+from time import sleep
 
 servers = ['89.44.10.210',
            '37.120.218.170',
@@ -52,7 +53,7 @@ def set_ssh_proxy():
     proxy_port = '1234'
     ssh_password = 'mullvad'
     ssh_port = '22'
-    ssh_key = subprocess.run(['ssh-keyscan', proxy_address], stdout=subprocess.PIPE)
+    ssh_key = subprocess.run(['mullvad-exclude', 'ssh-keyscan', proxy_address], stdout=subprocess.PIPE)
     ssh_key = ssh_key.stdout.decode('utf-8').split('\n')
     known_hosts = subprocess.run('cat ~/.ssh/known_hosts', stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8')
     if proxy_address not in known_hosts:
@@ -64,6 +65,7 @@ def set_ssh_proxy():
     subprocess.run(['mullvad', 'bridge', 'set', 'custom', 'local', proxy_port, proxy_address, ssh_port])
     subprocess.run(['mullvad', 'relay', 'set', 'tunnel-protocol', 'openvpn'])
     subprocess.run(['mullvad', 'bridge', 'set', 'state', 'on'])
+    sleep(1)
 
 
 def set_remote_socks():  # not to be used regularly and to be removed later
