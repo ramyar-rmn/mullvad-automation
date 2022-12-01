@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="added features and major fix">
+    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="fixes on activating bridge">
+      <change afterPath="$PROJECT_DIR$/tor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/bridge.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/connection.py" afterDir="false" />
@@ -10,6 +11,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +57,7 @@
       <workItem from="1669703131785" duration="2117000" />
       <workItem from="1669706989747" duration="300000" />
       <workItem from="1669711049238" duration="5100000" />
-      <workItem from="1669719282750" duration="1864000" />
+      <workItem from="1669719282750" duration="24396000" />
     </task>
     <task id="LOCAL-00001" summary="edited the json read">
       <created>1669636900169</created>
@@ -86,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669716060646</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixes on activating bridge">
+      <created>1669722051998</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1669722051998</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,11 +130,12 @@
     <MESSAGE value="minor optimizations" />
     <MESSAGE value="typo" />
     <MESSAGE value="added features and major fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="added features and major fix" />
+    <MESSAGE value="fixes on activating bridge" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes on activating bridge" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/mullvad_automation$account.coverage" NAME="account Coverage Results" MODIFIED="1669662071341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mullvad_automation$connection.coverage" NAME="connection Coverage Results" MODIFIED="1669711443245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mullvad_automation$connection.coverage" NAME="connection Coverage Results" MODIFIED="1669922030881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mullvad_automation$bridge.coverage" NAME="bridge Coverage Results" MODIFIED="1669662058431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

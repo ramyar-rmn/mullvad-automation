@@ -1,4 +1,43 @@
 import subprocess
+from random import randint
+
+servers = ['89.44.10.210',
+           '37.120.218.170',
+           '37.120.205.226',
+           '198.54.132.178',
+           '217.138.199.106',
+           '193.138.7.132',
+           '146.70.117.130',
+           '209.58.185.59',
+           '91.193.7.98',
+           '185.65.134.66',
+           '91.90.44.10',
+           '194.127.199.245',
+           '5.253.206.194',
+           '185.120.144.114',
+           '94.198.43.114',
+           '45.152.183.34',
+           '185.213.154.117',
+           '193.138.218.71',
+           '45.83.220.117',
+           '185.65.135.117',
+           '193.32.127.117',
+           '91.193.4.210',
+           '141.98.252.66',
+           '217.138.254.130',
+           '194.37.96.162',
+           '66.115.180.241',
+           '174.127.113.18',
+           '194.110.112.50',
+           '89.45.90.249',
+           '89.38.227.242',
+           '86.106.143.249',
+           '198.54.133.178',
+           '198.54.130.178',
+           '69.4.234.146',
+           '198.54.134.178',
+           '198.54.131.178',
+           ]
 
 
 def set_tor_proxy():
@@ -9,10 +48,17 @@ def set_tor_proxy():
 
 
 def set_ssh_proxy():
-    proxy_address = '193.138.218.71'  # TODO: read from server list
+    proxy_address = servers[randint(0, len(servers)-1)]
     proxy_port = '1234'
     ssh_password = 'mullvad'
     ssh_port = '22'
+    ssh_key = subprocess.run(['ssh-keyscan', proxy_address], stdout=subprocess.PIPE)
+    ssh_key = ssh_key.stdout.decode('utf-8').split('\n')
+    known_hosts = subprocess.run('cat ~/.ssh/known_hosts', stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8')
+    if proxy_address not in known_hosts:
+        for line in ssh_key:
+            if line and not line.startswith('#'):
+                subprocess.run('echo' + " '" + line + "' " + '>> ~/.ssh/known_hosts', shell=True)
     subprocess.run(['mullvad-exclude', 'sshpass', '-p', ssh_password, 'ssh', '-f', '-N', '-D', proxy_port,
                     'mullvad@'+proxy_address, proxy_port])
     subprocess.run(['mullvad', 'bridge', 'set', 'custom', 'local', proxy_port, proxy_address, ssh_port])
@@ -32,7 +78,7 @@ def set_remote_socks():  # not to be used regularly and to be removed later
 
 
 def set_shadow_socks():
-    proxy_address = '194.127.199.245'  # TODO: read from server list
+    proxy_address = servers[randint(0, len(servers)-1)]
     proxy_port = '443'
     ss_port = '1080'
     # TODO: wrote it based on mullvad tutorial but it's not assured

@@ -8,7 +8,7 @@ from sys import argv
 
 
 # python connection.py <mullvad acc number> <bridge type: ssh or shadow>
-shell_args = argv
+shell_args = argv  # TODO: or to be passed by a file consisting acc, bridge_type, network_quality_criteria, ...
 mullvad_account = shell_args[1]
 bridge_to_be = shell_args[2]
 
@@ -22,7 +22,7 @@ while True:
             connection_state = json.loads(urlopen('https://am.i.mullvad.net/json').read().decode())
         except:  # TODO: write it more detailed
             print("BUT connection to mullvad API failed")
-            subprocess.run(['mullvad', 'disconnect'])
+            subprocess.run(['mullvad', 'reconnect'])
             break
         print('https://mullvad.net shows your connection to mullvad is:', connection_state["mullvad_exit_ip"])
         print('That is using protocol:', connection_state["mullvad_server_type"])
@@ -42,13 +42,15 @@ while True:
         print('PING to vpn server takes:', ping_time_vpn)
         print('PING to proxy server takes:', ping_time_proxy)
         # reconnect for 1.leaked connection 2.blacklisted IP
-        # 3.high ping to mullvad 4.high ping to vpn server 5.high ping to proxy server
+        # 3.high ping
+        # TODO: need far better criteria
         if connection_state["mullvad_exit_ip"] is False \
                 or connection_state["blacklisted"]["blacklisted"] is True \
-                or int(ping_time_mullvad.split("=")[1]) > 1000 \
-                or int(ping_time_vpn.split('=')[1]) > 1000 \
-                or int(ping_time_proxy.split('=')[1]) > 1000:
-            subprocess.run(['mullvad', 'disconnect'])
+                or (int(ping_time_mullvad.split("=")[1]) + int(ping_time_vpn.split("=")[1])
+                    + int(ping_time_proxy.split("=")[1])) > 3000:
+            subprocess.run(
+                ['mullvad', 'disconnect'])  # TODO: not secured -> the connection will not be through VPN for a while
+            bridge.activate(bridge_to_be)
             break
         sleep(30)
         vpn_status = subprocess.run(['mullvad', 'status'], stdout=subprocess.PIPE)
@@ -69,14 +71,16 @@ while True:
             print("Trying to run the bridge")
             bridge.activate(bridge_to_be)
     while vpn_connection[0].startswith("Disconnecting"):  # it happens when the proxy bridge is failing
-        print("disconnecting from mullvad and checking the bridge")
-        subprocess.run(['mullvad', 'disconnect'])
+        print("disconnect from mullvad and checking the bridge")
+        subprocess.run(
+            ['mullvad', 'disconnect'])  # TODO: not secured -> the connection will not be through VPN for a while
+        bridge.activate(bridge_to_be)
         vpn_status = subprocess.run(['mullvad', 'status'], stdout=subprocess.PIPE)
         vpn_connection = vpn_status.stdout.decode('utf-8').split(" ")
     while not account.logged(mullvad_account):  # login
         print("trying to log in")
         if bridge.ok():
             account.logout()
-            account.login(mullvad_account)
+            account.login(mullvad_account)  # TODO: the problem with logging in persists
         else:
             bridge.activate(bridge_to_be)
