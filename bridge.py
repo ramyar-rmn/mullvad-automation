@@ -125,7 +125,7 @@ def ok(info=False):  # TODO: write for proxy: remote as well if needed
             return False
 
 
-def activate(bridge_type):  # TODO: set for TOR and remote
+def activate(bridge_type):
     if ok():
         listening = ok(info=True)['listening']
         for p in listening:
@@ -134,3 +134,4 @@ def activate(bridge_type):  # TODO: set for TOR and remote
         set_ssh_proxy()
     elif bridge_type == 'shadow':
         set_shadow_socks()
+    # TODO: set for TOR and remote

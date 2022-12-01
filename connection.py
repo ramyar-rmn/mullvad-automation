@@ -22,6 +22,7 @@ while True:
             connection_state = json.loads(urlopen('https://am.i.mullvad.net/json').read().decode())
         except:  # TODO: write it more detailed
             print("BUT connection to mullvad API failed")
+            bridge.activate(bridge_to_be)
             subprocess.run(['mullvad', 'reconnect'])
             break
         print('https://mullvad.net shows your connection to mullvad is:', connection_state["mullvad_exit_ip"])
