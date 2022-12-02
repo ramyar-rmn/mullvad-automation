@@ -58,14 +58,13 @@ def set_ssh_proxy():
     known_hosts = subprocess.run('cat ~/.ssh/known_hosts', stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8')
     if proxy_address not in known_hosts:
         for line in ssh_key:
-            if line and not line.startswith('#'):
+            if line and not line.startswith('#'):  # TODO: any security threats?
                 subprocess.run('echo' + " '" + line + "' " + '>> ~/.ssh/known_hosts', shell=True)
     subprocess.run(['mullvad-exclude', 'sshpass', '-p', ssh_password, 'ssh', '-f', '-N', '-D', proxy_port,
-                    'mullvad@'+proxy_address, proxy_port])
+                    'mullvad@'+proxy_address, proxy_port], stdout=subprocess.PIPE)
     subprocess.run(['mullvad', 'bridge', 'set', 'custom', 'local', proxy_port, proxy_address, ssh_port])
     subprocess.run(['mullvad', 'relay', 'set', 'tunnel-protocol', 'openvpn'])
     subprocess.run(['mullvad', 'bridge', 'set', 'state', 'on'])
-    sleep(1)
 
 
 def set_remote_socks():  # not to be used regularly and to be removed later
