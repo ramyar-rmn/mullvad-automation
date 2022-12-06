@@ -1,6 +1,5 @@
 import subprocess
 from random import randint
-from time import sleep
 
 servers = ['89.44.10.210',
            '37.120.218.170',
@@ -53,23 +52,24 @@ def set_ssh_proxy():
     proxy_port = '1234'
     ssh_password = 'mullvad'
     ssh_port = '22'
-    ssh_key = subprocess.run(['mullvad-exclude', 'ssh-keyscan', proxy_address], stdout=subprocess.PIPE)
-    ssh_key = ssh_key.stdout.decode('utf-8').split('\n')
     known_hosts = subprocess.run('cat ~/.ssh/known_hosts', stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8')
     if proxy_address not in known_hosts:
+        ssh_key = subprocess.run(['mullvad-exclude', 'ssh-keyscan', proxy_address], stdout=subprocess.PIPE)\
+            .stdout.decode('utf-8').split('\n')
         for line in ssh_key:
             if line and not line.startswith('#'):  # TODO: any security threats?
                 subprocess.run('echo' + " '" + line + "' " + '>> ~/.ssh/known_hosts', shell=True)
     subprocess.run(['mullvad-exclude', 'sshpass', '-p', ssh_password, 'ssh', '-f', '-N', '-D', proxy_port,
                     'mullvad@'+proxy_address, proxy_port], stdout=subprocess.PIPE)
-    subprocess.run(['mullvad', 'bridge', 'set', 'custom', 'local', proxy_port, proxy_address, ssh_port])
-    subprocess.run(['mullvad', 'relay', 'set', 'tunnel-protocol', 'openvpn'])
-    subprocess.run(['mullvad', 'bridge', 'set', 'state', 'on'])
+    subprocess.run(['mullvad', 'bridge', 'set', 'custom', 'local', proxy_port, proxy_address, ssh_port],
+                   stdout=subprocess.PIPE)
+    subprocess.run(['mullvad', 'relay', 'set', 'tunnel-protocol', 'openvpn'], stdout=subprocess.PIPE)
+    subprocess.run(['mullvad', 'bridge', 'set', 'state', 'on'], stdout=subprocess.PIPE)
 
 
 def set_remote_socks():  # not to be used regularly and to be removed later
     proxy_address = 'be filled with LAN IP of that device'
-    proxy_port = '1080'
+    proxy_port = 'be filled with the socks port of the device'
     proxy_username = 'a'
     proxy_password = 'a'
     subprocess.run(['mullvad', 'bridge', 'set', 'custom', 'remote',
@@ -117,20 +117,18 @@ def ok(info=False):  # TODO: write for proxy: remote as well if needed
         if proxy_open_ports:
             if info is True:
                 return {'ip': bridge_proxy_address, 'port': bridge_proxy_port, 'listening': proxy_open_ports}
-            print("and it is listening")
-            return True
+            else:
+                print("and it is listening")
+                return True
         else:
             print("but it is not listening")
             return False
 
 
 def activate(bridge_type):
-    if ok():
-        listening = ok(info=True)['listening']
-        for p in listening:
-            subprocess.run(['kill', '-9', p[1]])
-    if bridge_type == 'ssh':
-        set_ssh_proxy()
-    elif bridge_type == 'shadow':
-        set_shadow_socks()
+    if not ok():
+        if bridge_type == 'ssh':
+            set_ssh_proxy()
+        elif bridge_type == 'shadow':
+            set_shadow_socks()
     # TODO: set for TOR and remote
