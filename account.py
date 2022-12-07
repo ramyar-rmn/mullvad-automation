@@ -10,9 +10,11 @@ def login(account_number):
 
 
 def logged(account_number):
-    account_status = subprocess.run(['mullvad', 'account', 'get'], stdout=subprocess.PIPE)
+    account_status = subprocess.run(['mullvad', 'account', 'get'], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     if account_number == account_status.stdout.decode('utf-8').split('\n')[0].split(' ')[-1]:
         return True
+    else:
+        return False
 
 
 def logout():

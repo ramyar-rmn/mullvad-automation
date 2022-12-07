@@ -32,8 +32,9 @@ while True:
         print("You are supposed to be connected to", vpn_connection[-3])
         try:
             connection_state = json.loads(urlopen('https://am.i.mullvad.net/json').read().decode())
-        except:  # TODO: write it more detailed
+        except Exception as e:  # TODO: write it more detailed
             print("BUT connection to mullvad API failed")
+            print("error in reaching the API is: ", e)
             reconnect(bridge_to_be)
             continue
         print('https://mullvad.net shows your connection to mullvad is:', connection_state["mullvad_exit_ip"])
@@ -70,23 +71,22 @@ while True:
         print("------ Mullvad states Disconnecting -------")
         print("bridge is failing and reconnect to mullvad")
         reconnect(bridge_to_be)
+        sleep(5)  # TODO: need better practice
     elif vpn_connection[0] == "Disconnected\n":
         print("******* Mullvad is disconnected ***********")
-        with account.logged(mullvad_account) as a:  # TODO: the problem with logging-in persists then can be deleted
-            if a:  # connect
-                print("Mullvad acc is logged in")
-                if not bridge.ok():
-                    print("Trying to run the bridge")
-                    bridge.activate(bridge_to_be)
-                subprocess.run(['mullvad', 'connect'])
-                vpn_status = subprocess.run(['mullvad', 'status'], stdout=subprocess.PIPE)
-                vpn_connection = vpn_status.stdout.decode('utf-8').split(" ")
-            elif not a:  # login
-                print("trying to log in")
-                if not bridge.ok():
-                    bridge.activate(bridge_to_be)
-                account.logout()
-                account.login(mullvad_account)
+        if account.logged(mullvad_account):  # connect
+            print("Mullvad acc is logged in")
+            if not bridge.ok():
+                print("Trying to run the bridge")
+                bridge.activate(bridge_to_be)
+            subprocess.run(['mullvad', 'connect'])
+            sleep(1)
+        elif not account.logged(mullvad_account):  # login # TODO: the problem with logging-in persists then can be deleted
+            print("trying to log in")
+            if not bridge.ok():
+                bridge.activate(bridge_to_be)
+            account.logout()
+            account.login(mullvad_account)
     elif vpn_connection[0].startswith("Connecting"):
         print("+++++++++ Mullvad claim is connecting +++++++++++")
         if bridge.ok():

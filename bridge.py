@@ -57,7 +57,7 @@ def set_ssh_proxy():
         ssh_key = subprocess.run(['mullvad-exclude', 'ssh-keyscan', proxy_address], stdout=subprocess.PIPE)\
             .stdout.decode('utf-8').split('\n')
         for line in ssh_key:
-            if line and not line.startswith('#'):  # TODO: any security threats?
+            if line and not line.startswith('#'):
                 subprocess.run('echo' + " '" + line + "' " + '>> ~/.ssh/known_hosts', shell=True)
     subprocess.run(['mullvad-exclude', 'sshpass', '-p', ssh_password, 'ssh', '-f', '-N', '-D', proxy_port,
                     'mullvad@'+proxy_address, proxy_port], stdout=subprocess.PIPE)
@@ -82,7 +82,7 @@ def set_shadow_socks():
     proxy_address = servers[randint(0, len(servers)-1)]
     proxy_port = '443'
     ss_port = '1080'
-    # TODO: wrote it based on mullvad tutorial but it's not assured
+    # TODO: wrote it based on mullvad tutorial, but it's not assured
     subprocess.run(['mullvad-exclude', 'ss-local', '-s', proxy_address, '-p', proxy_port, '-l', ss_port, '-k',
                     'mullvad', '-m', 'chacha20-ietf-poly1305', '-b', '127.0.0.1', '--fast-open', '--no-delay',
                     '--plugin', 'ss-v2ray-plugin', '--plugin-opts', '''"mode=quic;host=$HOST"'''])

@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="fixes stuck in connecting">
+    <list default="true" id="12943213-bbd3-4216-bf64-a56c7058c2b9" name="Changes" comment="optimization in changing bridges and reconnecting">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ramin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/ramin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/account.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/bridge.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/connection.py" afterDir="false" />
     </list>
@@ -71,7 +73,11 @@
       <workItem from="1670078020469" duration="152000" />
       <workItem from="1670141234582" duration="1604000" />
       <workItem from="1670353609529" duration="4139000" />
-      <workItem from="1670358150844" duration="4696000" />
+      <workItem from="1670358150844" duration="4813000" />
+      <workItem from="1670363915780" duration="574000" />
+      <workItem from="1670367196426" duration="1184000" />
+      <workItem from="1670400876390" duration="2675000" />
+      <workItem from="1670420386030" duration="4514000" />
     </task>
     <task id="LOCAL-00001" summary="edited the json read">
       <created>1669636900169</created>
@@ -143,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669976346205</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="optimization in changing bridges and reconnecting">
+      <created>1670362919692</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1670362919692</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,7 +190,8 @@
     <MESSAGE value="change all disconnects to reconnect to improve network security" />
     <MESSAGE value="ready to be used" />
     <MESSAGE value="fixes stuck in connecting" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes stuck in connecting" />
+    <MESSAGE value="optimization in changing bridges and reconnecting" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimization in changing bridges and reconnecting" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/mullvad_automation$bridge.coverage" NAME="bridge Coverage Results" MODIFIED="1669662058431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
