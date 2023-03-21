@@ -60,9 +60,10 @@ while True:
         # 3.high ping
         # TODO: need far better criteria
         if connection_state["mullvad_exit_ip"] is False \
-                or connection_state["blacklisted"]["blacklisted"] is True \
-                or (int(ping_time_mullvad.split("=")[1]) + int(ping_time_vpn.split("=")[1])
-                    + int(ping_time_proxy.split("=")[1])) > 3000:
+                or connection_state["blacklisted"]["blacklisted"] is True:
+            # \
+            #     or (int(ping_time_mullvad.split("=")[1]) + int(ping_time_vpn.split("=")[1])
+            #         + int(ping_time_proxy.split("=")[1])) > 3000:
             print("BUT bad connection is established")
             reconnect(bridge_to_be)
             continue
